@@ -13,9 +13,9 @@ Plex trascodes data as it streams from server to client. This is all good, but w
 There are a few steps before we can start installing reelr.
 
 1. Install MongoDB (this takes a while).
-⋅⋅1. If you're installing Mongo on a Raspberry Pi or any ARM Processor, you have to rebuild it from the source.
-⋅⋅⋅Here's a [great tutorial for building MongoDB for ARM](https://mongopi.wordpress.com/2012/11/25/installation/)
-⋅⋅2. If you're installing Mongo on any other architecture [follow the documentation](http://docs.mongodb.org/manual/installation/)
+..1. If you're installing Mongo on a Raspberry Pi or any ARM Processor, you have to rebuild it from the source.
+..Here's a [great tutorial for building MongoDB for ARM](https://mongopi.wordpress.com/2012/11/25/installation/)
+..2. If you're installing Mongo on any other architecture [follow the documentation](http://docs.mongodb.org/manual/installation/)
 2. Next we have to install Apache Web Server.
 	```
 	$ sudo apt-get install apache2 -y

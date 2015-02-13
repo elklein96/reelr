@@ -6,7 +6,7 @@ reelr is a dynamic interface for a movie server.
 
 ## How is this different from Plex?
 
-Plex trascodes data as it streams from server to client. This is all good, but when it comes to slower processors like the Raspberry Pi, Plex can be problematic.  This is simply a front end that streams movie files as-is; no transcoding involved.
+Plex trascodes data as it streams from server to client. This is all good, but when it comes to slower processors like the Raspberry Pi, Plex can be problematic.  reelr is simply a front end that streams movie files as-is; no transcoding involved.
 
 ## Wow, that's great. How do I use this?
 

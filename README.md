@@ -71,7 +71,7 @@ There are a few steps before we can start installing reelr.
 	</Directory>
 	```
 
-> We just mapped each directory to its respective page as well as enabled authorization for the server.
+	> We just mapped each directory to its respective page as well as enabled authorization for the server.
 
 5. To add more users to the server, simply create a new Unix user and add to `.htpasswd` with the following:
 
@@ -94,7 +94,7 @@ There are a few steps before we can start installing reelr.
 	```
 	$ mongod
 	```
-	
+
 > If you want, you can run `$ nohup mongod` so that the daemon is constantly running.
 
 And that's it! Have fun!

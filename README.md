@@ -25,7 +25,7 @@ $ sudo apt-get install apache2 -y
 $ sudo nano `httpd.conf`
 ```
 4. Enter the following into `httpd.conf`
-
+	```
 	ServerName localhost
 
 	DocumentRoot /var/www
@@ -64,7 +64,7 @@ $ sudo nano `httpd.conf`
 	<Directory "/var/www/media">
 	    Options -Indexes
 	</Directory>
-
+	```
 > We just mapped each directory to its respective page as well as enabled authorization for the server.
 
 5. To add more users to the server, simply create a new Unix user and add to `.htpasswd` with the following:

@@ -1,0 +1,29 @@
+{
+
+	/********************************************
+
+	    A few things to know:
+
+
+	    Every movie file must have a parent  
+	    directory with the actual name of the 
+	    movie. The movie file CANNOT be the 
+	    child of the Movies directory.
+
+	    An example file tree:
+	    Movies/Toy Story/ToyStory.mkv
+
+
+	    For streaming to work properly, all
+	    movies must be H.264 encoded and 
+	    compatible with HTML5 video.
+
+	********************************************/
+
+	//Enter the path to your movie directory.
+	"path":"/path/to/file", 
+
+	//Name of the server.
+	"name":"Server Name"
+
+}

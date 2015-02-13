@@ -1,8 +1,8 @@
-# reeler
+# reelr
 
 ## What is this?
 
-reeler is a dynamic interface for a movie server. 
+reelr is a dynamic interface for a movie server. 
 
 ## How is this different from Plex?
 
@@ -10,7 +10,7 @@ Plex trascodes data as it streams from server to client. This is all good, but w
 
 ## Wow, that's great. How do I use this?
 
-There are a few steps before we can start installing reeler.
+There are a few steps before we can start installing reelr.
 
 1. Install MongoDB (this takes a while).
 ⋅⋅1. If you're installing Mongo on a Raspberry Pi or any ARM Processor, you have to rebuild it from the source.
@@ -75,7 +75,7 @@ $ htpasswd /etc/apache2/.htpasswd username
 ```
 6. Now we can clone the contents of this repository into `/var/www/`
 ```
-$ git clone https://github.com/elklein96/reeler
+$ git clone https://github.com/elklein96/reelr
 ```
 7. Enter the path of your movie directory and the name of your server into `config.json`
 

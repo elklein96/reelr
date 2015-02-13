@@ -94,7 +94,6 @@ There are a few steps before we can start installing reelr.
 	```
 	$ mongod
 	```
-
-> If you want, you can run `$ nohup mongod` so that the daemon is constantly running.
+	> If you want, you can run `$ nohup mongod` so that the daemon is constantly running.
 
 And that's it! Have fun!

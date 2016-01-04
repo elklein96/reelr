@@ -94,7 +94,7 @@ There are a few steps before we can start installing reelr.
 7. Mount your external filesystem with the following:
 	1. Execute `$ sudo fdisk -l` to find your external filesystem. (For me, it is located at /dev/sda1/)
 	2. Execute `$ sudo mount -t ext4 /dev/sda1 ~/HDDMount`
-		> This command mounts an external drive of type ext4 found at /dev/sda1 to a symbolic link located at ~/HDDMount.
+	> This command mounts an external drive of type ext4 found at /dev/sda1 to a symbolic link located at ~/HDDMount.
 
 8. Enter the path of your movie directory and the name of your server into `config.json`
 

@@ -43,9 +43,12 @@ try {
 		}
 		else
 			$files = $tmp;
-
+		for($i=0; $i<count($files); $i++){
+			error_log($files[$i]);
+		}
 
 		getData($files, $dir);
+
 	}
 
 	else

@@ -16,6 +16,8 @@ try {
 	if(isset($_POST['query'])){
 		$query = $_POST['query'];
 
+		error_log($query);
+
 		retrieveDocs($query);
 	}
 	else
@@ -29,11 +31,13 @@ function retrieveDocs($query){
 	global $collection;
 	$output = array();
 
-	$regex = new MongoRegex("/^".$query."/i");
-	$cursor = $collection->find(array('title' => $regex));
+	$where = array('title' => array('$regex' => new MongoRegex("/^".$query."/i")));
+	$cursor = $collection->find($where);
 
 	$i=0;
    	foreach($cursor as $item){
+   		$filepath = getMovieFile($item['path']);
+   		
        	$output[$i] = array(
            	'_id'=>$item['_id'],
            	'id'=>$item['id'],
@@ -42,13 +46,19 @@ function retrieveDocs($query){
            	'year'=>$item['year'],
            	'duration'=>$item['duration'],
            	'genre'=>$item['genre'],
+           	'plot'=>$item['plot'],
            	'poster'=>$item['poster'],
-           	'path'=>$item['path'],
+           	'path'=>$filepath,
            	'counter' => $i
         );
        	$i++;
    }
 	echo json_encode($output);
+}
+
+function getMovieFile($path){
+	$tmp = scandir($path, 1);
+	return $path.'/'.$tmp[0];
 }
 
 ?>

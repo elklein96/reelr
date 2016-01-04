@@ -1,10 +1,9 @@
 var json = '';
 var preview = false;
-var target = "/var/www/media/Movies/";
 var currentMovie = 0;
 
 var config = $.parseJSON("config.json");
-target = config.path;
+var target = config.path;
 $(document).prop('title', target = config.name);
 
 $(document).ready(function() {
@@ -36,6 +35,7 @@ $(document).ready(function() {
           
           $('#date'+i).text(json[i].year);
         }
+        $("#movie-count").text(" ("+json.length+")");
       }
     }
   });
@@ -61,7 +61,7 @@ $(document).on('click', '.movie', function () {
 
   if(!preview){
     $(this).addClass('selected');
-    $(this).parent().after("<div id='preview'><div class='preview-header'><h4>"+json[currentMovie].title+"</h4><hr noshade style='width:100%;height:0.5px;color:#FFF;'><h6>"+json[currentMovie].director+"</h6><br><p>"+json[currentMovie].plot+"</p><br><a href='javascript:void(0)' id='play' class='btn btn-primary'>Play</a><a href='"+json[currentMovie].path.replace('/var/www', '')+"' id='download' class='btn btn-success'>Download</a></div><div class='poster-container' style='padding-top:1.5%;'><img class='poster-big' src='"+json[currentMovie].poster+"'></div></div>");
+    $(this).parent().after("<div id='preview'><div class='preview-header'><h4>"+json[currentMovie].title+"</h4><hr noshade style='width:100%;height:0.5px;color:#FFF;'><h6>"+json[currentMovie].director+"</h6><br><p>"+json[currentMovie].plot+"</p><br><a href='javascript:void(0)' id='play' class='btn btn-primary'>Play</a><a href='"+json[currentMovie].path.replace(target, '/media/Movies/')+"' id='download' class='btn btn-success'>Download</a></div><div class='poster-container' style='padding-top:1.5%;'><img class='poster-big' src='"+json[currentMovie].poster+"'></div></div>");
     $('#preview').hide();
 
     $( "#preview" ).animate({
@@ -90,9 +90,10 @@ $(document).on('click', '#play', function () {
 $(document).on('keypress', '#search-bar', function (event) {
     if (event.which == 13) {
       event.preventDefault();
-      var search = $("#search-bar").val
+      var search = $("#search-bar").val();
 
-      $('#movie-wrapper').empty();
+      $('.movie').remove();
+      $('#loading').show();
 
       $.ajax({
         type:   "POST",
@@ -101,7 +102,7 @@ $(document).on('keypress', '#search-bar', function (event) {
             query:  search
         },
         success: function(data) {
-          $('#loading').show();
+          $('#loading').hide();
           
           if(data.indexOf("Error") > -1){
             $('#movie-wrapper').append('<p class="text-danger message"><br><br><br>'+data.replace('Error', '')+'</p>');
@@ -122,8 +123,71 @@ $(document).on('keypress', '#search-bar', function (event) {
               
               $('#date'+i).text(json[i].year);
             }
+            $("#movie-count").text(" ("+json.length+")");
           }
         }
       });
     }
+});
+
+$(document).on('click', '#upload-button', function () {
+  var reader;
+  var progress = document.querySelector('.percent');
+
+  function abortRead() {
+    reader.abort();
+  }
+
+  function errorHandler(evt) {
+    switch(evt.target.error.code) {
+      case evt.target.error.NOT_FOUND_ERR:
+        alert('File Not Found!');
+        break;
+      case evt.target.error.NOT_READABLE_ERR:
+        alert('File is not readable');
+        break;
+      case evt.target.error.ABORT_ERR:
+        break; // noop
+      default:
+        alert('An error occurred reading this file.');
+    };
+  }
+
+  function updateProgress(evt) {
+    if (evt.lengthComputable) {
+      var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
+      // Increase the progress bar length.
+      if (percentLoaded < 100) {
+        progress.style.width = percentLoaded + '%';
+        progress.textContent = percentLoaded + '%';
+      }
+    }
+  }
+
+  function handleFileSelect(evt) {
+    // Reset progress indicator on new file selection.
+    progress.style.width = '0%';
+    progress.textContent = '0%';
+
+    reader = new FileReader();
+    reader.onerror = errorHandler;
+    reader.onprogress = updateProgress;
+    reader.onabort = function(e) {
+      alert('File read cancelled');
+    };
+    reader.onloadstart = function(e) {
+      document.getElementById('progress_bar').className = 'loading';
+    };
+    reader.onload = function(e) {
+      // Ensure that the progress bar displays 100% at the end.
+      progress.style.width = '100%';
+      progress.textContent = '100%';
+      setTimeout("document.getElementById('progress_bar').className='';", 2000);
+    }
+
+    // Read in the image file as a binary string.
+    reader.readAsBinaryString(evt.target.files[0]);
+  }
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
 });

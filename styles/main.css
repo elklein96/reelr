@@ -5467,14 +5467,13 @@ button.close {
   overflow: hidden;
 }
 .modal {
-  display: none;
   overflow: hidden;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1040;
+  z-index: 100040;
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }
@@ -6542,6 +6541,31 @@ a.list-group-item-danger.active:focus {
   margin-left: 3%;
 }
 
-#footer{
-  height: 10%;
+#progress_bar {
+  margin: 10px 0;
+  padding: 3px;
+  border: 1px solid #000;
+  font-size: 14px;
+  clear: both;
+  opacity: 0;
+  -moz-transition: opacity 1s linear;
+  -o-transition: opacity 1s linear;
+  -webkit-transition: opacity 1s linear;
+}
+#progress_bar.loading {
+  opacity: 1.0;
+}
+#progress_bar .percent {
+  background-color: #99ccff;
+  height: auto;
+  width: 0;
+}
+
+.data-field-name{
+  display: inline;
+}
+
+.data-field{
+  display: block inline;
+  color: #000000;
 }

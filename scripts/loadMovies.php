@@ -25,30 +25,63 @@ try {
 			$dir = $dir.'/';
 		
 		//Get file names
-		$tmp = scandir($dir, 1);
+		$tmp = preg_grep('/^([^.])/', scandir($dir, 1));
 
 		//Sort Mongo docs by age (newest to oldest).
-		$cursor->sort(array('_id' => -1));
+		$cursor->sort(array('date_add' => -1));
 		if ($cursor->count() > 0) {
 		    $cursor->next();
 		    $last = $cursor->current();
-			$statLast = stat($dir.$last['title']);	    
 
 		    //Get all files younger than newest Mongo doc.
-		    for($i=0; $i<(count($tmp)-2); $i++){
+		    for($i=0; $i<count($tmp); $i++){
 		    	$statTmp = stat($dir.$tmp[$i]);
-				if($statTmp['mtime'] > $statLast['mtime'])
+				if($statTmp['mtime'] > $last['date_add'])
 					array_push($files, $tmp[$i]);
 			}
 		}
 		else
 			$files = $tmp;
-		for($i=0; $i<count($files); $i++){
-			error_log($files[$i]);
-		}
 
 		getData($files, $dir);
+	}
 
+	if(isset($_POST['metadata'])){
+		$data = $_POST['metadata'];
+		$data = json_encode(str_replace('\\\\', '', $data));
+		$json = json_decode($data);
+		$json = json_decode($json, true);
+
+		error_log($json['id']);
+
+		$poster = getPoster($json['poster_url']);
+
+		$out = '{"id":"'.$json['id'].'", "date_add":"'.time().'", "title":"'.$json['title'].'", "director":"'.$json['director'].'", "year":"'.$json['year'].'", "duration":"'.$json['duration'].'", "genre":"'.$json['genre'].'", "plot":"'.str_replace('"', '\"', $json['plot']).'", "poster_url":"'.$json['poster_url'].'", "poster":"'.$poster.'", "path":"'.$json['plot'].'"}';
+
+		$collection->remove(array('id' => $json['id']));
+
+		addToMongo($out, $json['imdbID'], $json['Title']);
+	}
+
+	if(isset($_POST['refresh'])){
+		$collection->remove();
+	}
+
+	if(isset($_POST['remove'])){
+		$collection->remove(array('id' => $_POST['remove']));
+	}
+
+	if(isset($_POST['reload'])){
+		$files = array();
+
+		$data = $_POST['reload'];
+		$data = json_encode(str_replace('\\\\', '', $data));
+		$json = json_decode($data);
+		$json = json_decode($json, true);
+
+		$collection->remove(array('id' => $json['id']));
+		array_push($files, $json['title']);
+		getData($files, $json['directory']);
 	}
 
 	else
@@ -62,27 +95,31 @@ function getData($titles, $dir){
 	for($i=0; $i<count($titles); $i++){
 		$title = str_replace(' ', '%20', $titles[$i]);
 		$data = file_get_contents("http://www.omdbapi.com/?t=".$title."&plot=short&r=json");
-		$data = json_encode(str_replace('\\', '', $data));
+		$data = json_encode(str_replace('\\\\', '', $data));
 		$json = json_decode($data);
 		$json = json_decode($json, true);
 
-		$id = $json['imdbID'];
-		$poster = 'data:image/'.pathinfo($json['Poster'], PATHINFO_EXTENSION).';base64,'.base64_encode(file_get_contents($json['Poster']));
+		$poster = getPoster($json['Poster']);
 
-		$out = '{"id":"'.$id.'", "title":"'.$json['Title'].'", "director":"'.$json['Director'].'", "year":"'.$json['Released'].'", "duration":"'.$json['Runtime'].'", "genre":"'.$json['Genre'].'", "plot":"'.$json['Plot'].'", "poster":"'.$poster.'", "path":"'.$dir.$titles[$i].'"}';
+		$out = '{"id":"'.$json['imdbID'].'", "date_add":"'.time().'", "title":"'.$json['Title'].'", "director":"'.$json['Director'].'", "year":"'.$json['Released'].'", "duration":"'.$json['Runtime'].'", "genre":"'.$json['Genre'].'", "plot":"'.str_replace('"', '\"', $json['Plot']).'", "poster_url":"'.$json['Poster'].'", "poster":"'.$poster.'", "path":"'.$dir.$titles[$i].'"}';
 
-		error_log($out);
-		addToMongo($out, $id);
+		//error_log($out);
+		addToMongo($out, $json['imdbID'], $json['Title']);
 	}
 	retrieveDocs();
 }
 
-function addToMongo($document, $id){
+function getPoster($url){
+	$poster = 'data:image/'.pathinfo($url, PATHINFO_EXTENSION).';base64,'.base64_encode(file_get_contents($url));
+	return $poster;
+}
+
+function addToMongo($document, $id, $title){
 	global $collection;
 
 	$idQuery = array('id' => $id);
 	if($collection->find($idQuery)->count() == 0){
-		error_log("Added movie");
+		error_log("Added movie: ".$title);
 		$collection->insert(json_decode($document));
 	}
 	else
@@ -115,6 +152,7 @@ function retrieveDocs(){
            	'duration'=>$item['duration'],
            	'genre'=>$item['genre'],
            	'plot'=>$item['plot'],
+           	'poster_url'=>$item['poster_url'],
            	'poster'=>$item['poster'],
            	'path'=>$filepath,
            	'counter' => $i

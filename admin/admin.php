@@ -8,7 +8,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="/scripts/admin.js"></script>
-    <title>reelr</title>
+    <title>elkServer</title>
   </head>
   
   <body>
@@ -16,7 +16,7 @@
       <div id="page-wrapper">
         <div class="navbar navbar-inverse">
           <div class="navbar-header">
-            <a class="navbar-brand" href="/">reelr</a>
+            <a class="navbar-brand" href="/">elkServer</a>
           </div>
           <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav navbar-right">

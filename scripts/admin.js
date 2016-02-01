@@ -1,10 +1,7 @@
 var json = '';
 var preview = false;
+var target = "/var/www/media/Movies/";
 var currentMovie = 0;
-
-var config = $.parseJSON("config.json");
-var target = config.path;
-$(document).prop('title', target = config.name);
 
 $(document).ready(function() {
   loadMedia();

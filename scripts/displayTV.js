@@ -1,12 +1,12 @@
 var json = '';
 var preview = false;
-var target = "/var/www/media/Movies/";
+var target = "/var/www/media/TV/";
 var currentMovie = 0;
 
 $(document).ready(function() {
   $.ajax({
     type:   "POST",
-    url:    "../scripts/loadMovies.php",
+    url:    "../scripts/loadTV.php",
     data:   {
         directory:  target
     },
@@ -128,63 +128,20 @@ $(document).on('keypress', '#search-bar', function (event) {
 });
 
 $(document).on('click', '#upload-button', function () {
-  var reader;
-  var progress = document.querySelector('.percent');
+  //$("#upload-button").append('<div class="modal"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&amp;times;</button><h4 class="modal-title">Upload Media</h4></div><div class="modal-body"><input type="file" id="files" name="file" style="display:inline;"/><button type="button" class="btn btn-primary" onclick="abortRead();" style="display:inline;">Cancel read</button><br><div id="progress_bar"><div class="percent">0%</div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button><button type="button" class="btn btn-primary">Save changes</button></div></div></div></div>');
 
-  function abortRead() {
-    reader.abort();
+  var options = {
+    "backdrop" : "static"
   }
 
-  function errorHandler(evt) {
-    switch(evt.target.error.code) {
-      case evt.target.error.NOT_FOUND_ERR:
-        alert('File Not Found!');
-        break;
-      case evt.target.error.NOT_READABLE_ERR:
-        alert('File is not readable');
-        break;
-      case evt.target.error.ABORT_ERR:
-        break; // noop
-      default:
-        alert('An error occurred reading this file.');
-    };
-  }
-
-  function updateProgress(evt) {
-    if (evt.lengthComputable) {
-      var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
-      // Increase the progress bar length.
-      if (percentLoaded < 100) {
-        progress.style.width = percentLoaded + '%';
-        progress.textContent = percentLoaded + '%';
-      }
+  /*$.ajax({
+    type:   "POST",
+    url:    "../scripts/uploadMovie.php",
+    data:   {
+        title:  target+"TITLE"
+    },
+    success: function(data) {
+      
     }
-  }
-
-  function handleFileSelect(evt) {
-    // Reset progress indicator on new file selection.
-    progress.style.width = '0%';
-    progress.textContent = '0%';
-
-    reader = new FileReader();
-    reader.onerror = errorHandler;
-    reader.onprogress = updateProgress;
-    reader.onabort = function(e) {
-      alert('File read cancelled');
-    };
-    reader.onloadstart = function(e) {
-      document.getElementById('progress_bar').className = 'loading';
-    };
-    reader.onload = function(e) {
-      // Ensure that the progress bar displays 100% at the end.
-      progress.style.width = '100%';
-      progress.textContent = '100%';
-      setTimeout("document.getElementById('progress_bar').className='';", 2000);
-    }
-
-    // Read in the image file as a binary string.
-    reader.readAsBinaryString(evt.target.files[0]);
-  }
-
-  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+  });*/
 });

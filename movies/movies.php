@@ -16,7 +16,7 @@
       <div id="page-wrapper">
         <div class="navbar navbar-inverse">
           <div class="navbar-header">
-            <a class="navbar-brand" href="/">reelr</a>
+            <a class="navbar-brand" href="/">elkServer</a>
           </div>
           <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav navbar-right">

@@ -19,3 +19,28 @@ movie:hover {
   border-color: #303030;
   cursor: pointer;
 }
+
+.poster{
+  height: 160px;
+  margin:auto;
+  display: block;
+}
+
+.poster-big{
+  height: 280px;
+  margin:auto;
+  display: block;
+}
+
+#preview{
+  height: 50%;
+  background-color: #303030;
+}
+
+.preview-header{
+  display: block;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 50%;
+  float: left;
+}

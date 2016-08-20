@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('reelr.movies.factory', [])
+        .module('reelr.core')
         .factory('moviesFactory', moviesFactory);
 
     moviesFactory.$inject = ['$http'];

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('reelr.directive', [])
+        .module('reelr.main')
         .directive('reelrDirective', reelrDirective);
 
     reelrDirective.$inject = ['$rootScope'];

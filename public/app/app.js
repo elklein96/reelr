@@ -4,9 +4,9 @@
     angular
     	.module('reelr', [
     		'ngRoute',
-    		'reelr.controller',
-    		'reelr.movies.controller',
-    		'reelr.movies.directive'
+    		'reelr.main',
+    		'reelr.movies',
+            'reelr.core'
     	]).config(configuration);
 
         configuration.$inject = ['$routeProvider', '$locationProvider'];

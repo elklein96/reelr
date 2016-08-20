@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('reelr.controller', [])
+        .module('reelr.main')
         .controller('reelrController', reelrController);
 
     reelrController.$inject = ['$scope'];

@@ -1,5 +1,6 @@
 <section class="movies">
     <div class="container" ng-repeat="movie in movies">
-    	<movie movie="movie"></movie>
+    	<movie movie="movie" ng-click="toggleDisplay()"></movie>
+    	<preview ng-show="display"></preview>
     </div>
 </section>

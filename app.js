@@ -11,10 +11,10 @@ app.use("/app", express.static(__dirname + "/public/app"));
 app.use("/img", express.static(__dirname + "/public/app/img"));
 app.use("/css", express.static(__dirname + "/public/css"));
 
-app.get('/api', routes.fetch);
-app.put('/api', routes.change);
-app.post('/api', routes.create);
-app.delete('/api', routes.remove);
+app.put('/api/movies', routes.getMovies);
+//app.put('/api/movies', routes.editMovie);
+app.post('/api/movies', routes.addMovie);
+app.delete('/api/movies', routes.deleteMovie);
 
 app.get('*', function(req, res) {
     res.sendFile(__dirname+'/public/index.html');

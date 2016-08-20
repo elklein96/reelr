@@ -3,20 +3,19 @@
 
     angular
         .module('reelr.movies')
-        .directive('movie', movie);
+        .directive('preview', preview);
 
-    movie.$inject = ['$rootScope'];
+    preview.$inject = ['$rootScope'];
 
     /* @ngInject */
-    function movie($rootScope) {
+    function preview($rootScope) {
         return {
             restrict: 'E',
             scope: {
-              movie: '='
             },
-            templateUrl: '/app/partials/movie.html',
+            templateUrl: '/app/partials/preview.html',
             link: function(scope, element, attrs) {
-                console.log("movies directive");
+                console.log("preview directive");
             }
         };
     }

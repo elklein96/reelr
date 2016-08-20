@@ -1,3 +1,21 @@
 section {
 	margin-top: 100px;
 }
+
+movie {
+  height: 275px;
+  width: 160px;
+  position: relative;
+  display: inline;
+  float: left;
+  margin-right: 2.5%;
+  margin-bottom: 1%;
+  padding-top: 1%;
+}
+
+movie:hover {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #303030;
+  cursor: pointer;
+}

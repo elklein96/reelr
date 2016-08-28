@@ -1,13 +1,11 @@
-<div id='preview'>
-	<div class='preview-header'>
-		<h4>{{movie.title}}</h4>
-		<hr noshade style='width:100%;height:0.5px;color:#FFF;'>
-		<h6>{{movie.director}}</h6>
-		<br>
-		<p>{{movie.plot}}</p>
-		<br>
-		<a href='javascript:void(0)' id='play' class='btn btn-primary'>Play</a>
-		<a href='{{movie.path}}' id='download' class='btn btn-success'>Download</a>
-	</div>
-	<div class='poster-container' style='padding-top:1.5%;'><img class='poster-big' src='{{movie.poster}}'></div>
+<div class='preview-header'>
+	<h4>{{selected.title}}</h4>
+	<hr noshade style='width:100%;height:0.5px;color:#FFF;'>
+	<h6>{{selected.director}}</h6>
+	<br>
+	<p>{{selected.plot}}</p>
+	<br>
+	<a href='javascript:void(0)' id='play' class='btn btn-primary'>Play</a>
+	<a href='{{selected.path}}' id='download' class='btn btn-success'>Download</a>
 </div>
+<div class='poster-container' style='padding-top:1.5%;'><img class='poster-big' src='{{selected.poster}}'></div>

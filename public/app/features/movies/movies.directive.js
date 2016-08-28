@@ -12,11 +12,18 @@
         return {
             restrict: 'E',
             scope: {
-              movie: '='
+                movie: '='
             },
             templateUrl: '/app/partials/movie.html',
             link: function(scope, element, attrs) {
-                console.log("movies directive");
+                scope.onhover = function() {
+                    console.log("onhover");
+                    // attrs.$$element.find(".overlay").css({"background-color" : "#000"});
+                };
+
+                scope.onleave = function() {
+                    console.log("onleave");
+                };
             }
         };
     }

@@ -1,5 +1,5 @@
 {
-  "name": "node",
+  "name": "reelr",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,16 +8,27 @@
   "dependencies": {
     "express": "^4.13.3",
     "body-parser": "^1.13.3",
-    "mongoose": "^4.5.0",
-    "jade": "*"
+    "mongoose": "^4.5.0"
   },
   "devDependencies": {
+    "angular-mocks": "^1.5.8",
+    "chai": "^3.5.0",
     "grunt": "^1.0.1",
-    "grunt-develop": "^0.4.0",
+    "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-develop": "^0.4.0",
+    "grunt-karma": "^2.0.0",
     "grunt-shell-spawn": "^0.3.10",
+    "karma": "^1.2.0",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^1.1.1",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-sinon": "^1.0.5",
+    "load-grunt-tasks": "^3.2.0",
+    "mocha": "^3.0.2",
+    "phantomjs": "^2.1.7",
     "request": "^2.60.0",
-    "time-grunt": "^1.2.1",
-    "load-grunt-tasks": "^3.2.0"
+    "sinon": "^1.17.5",
+    "time-grunt": "^1.2.1"
   }
 }

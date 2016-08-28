@@ -1,6 +1,6 @@
 <section class="movies">
-    <div class="container" ng-repeat="movie in movies">
-    	<movie movie="movie" ng-click="toggleDisplay()"></movie>
-    	<preview ng-show="display"></preview>
+    <div class="container">
+    	<movie movie="movie" class="col-md-3 col-xs-4" ng-repeat="movie in movies" ng-mouseover="onhover()" ng-mouseleave="onleave()" ng-click="toggleDisplay(movie)"></movie>
+    	<preview class="row" ng-show="display"></preview>
     </div>
 </section>

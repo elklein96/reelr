@@ -9,15 +9,18 @@ module.exports = function (grunt) {
   var reloadPort = 35729, files;
 
   grunt.loadNpmTasks('grunt-shell-spawn');
+  grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     shell: {
       mongo: {
-          command: "sh bin/start-mongo.sh",
-          options: {
-            async: true
-          }
-      },
+        command: "sh bin/start-mongo.sh",
+        options: {
+          async: true
+        }
+      }
     },
     develop: {
       server: {
@@ -57,6 +60,17 @@ module.exports = function (grunt) {
           livereload: reloadPort
         }
       }
+    },
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js'
+      }
+    },
+    jshint: {
+      src: ['public/app/**/*.js'],
+      options : {
+        jshintrc: true
+      }
     }
   });
 
@@ -81,7 +95,21 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'develop',
-    'shell',
+    'shell:mongo',
     'watch'
   ]);
+
+  grunt.registerTask('no-db', [
+    'develop',
+    'watch'
+  ]);
+
+  grunt.registerTask('analyze', [
+    'jshint'
+  ]);
+
+  grunt.registerTask('test', [
+    'karma'
+  ]);
+
 };

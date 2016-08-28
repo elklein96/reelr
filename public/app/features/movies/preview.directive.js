@@ -11,11 +11,10 @@
     function preview($rootScope) {
         return {
             restrict: 'E',
-            scope: {
-            },
+            scope: false,
             templateUrl: '/app/partials/preview.html',
             link: function(scope, element, attrs) {
-                console.log("preview directive");
+                console.log(scope.selected);
             }
         };
     }

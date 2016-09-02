@@ -5,7 +5,7 @@ var app = express();
 
 var routes = require('./routes/routes');
 
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 3000);
 
 app.use("/app", express.static(__dirname + "/public/app"));
 app.use("/img", express.static(__dirname + "/public/app/img"));

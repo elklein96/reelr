@@ -24,7 +24,7 @@ module.exports = function (grunt) {
     },
     develop: {
       server: {
-        file: 'bin/www'
+        file: 'app.js'
       },
     },
     watch: {

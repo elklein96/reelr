@@ -32,7 +32,7 @@ There are a few steps before we can start installing reelr.
 
     - The architecture of reelr depends on the use of a load balancer in front of the UI and API. For local development, use your favorite proxy to serve as a load balancer for the UI (port 3002) and API (port 3001).
         - My proxy of choice is [HAProxy](http://www.haproxy.org/)
-        - Use the (included configuration file)[./haproxy.cfg] for running reelr with HAProxy
+        - Use the [included configuration file](./haproxy.cfg) for running reelr with HAProxy
 
     - Make sure to have a MongoDB instance installed and running with the following configuration:
         - Database: `media`

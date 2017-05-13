@@ -1,5 +1,6 @@
 const express = require('express');
 const http = require('http');
+const path = require('path');
 
 const errorHandler = require('./error-handler');
 
@@ -10,9 +11,9 @@ app.server = http.createServer(app);
 app.use(errorHandler.logError);
 app.use(errorHandler.sendError);
 
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/../dist'));
 app.get('*', function response(req, res) {
-    res.sendFile(path.join(__dirname, 'dist/index.html'));
+    res.sendFile(path.join(__dirname, '/../dist/index.html'));
 });
 
 app.server.listen(process.env.PORT || 3002);

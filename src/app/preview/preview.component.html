@@ -1,0 +1,13 @@
+<div id='preview'>
+    <div class='preview-header'>
+        <h3>{{movie.title}}</h3>
+        <hr noshade>
+        <h4>{{movie.director}}</h4><br>
+        <p>{{movie.plot}}</p><br>
+        <a href='javascript:void(0)' (click)='playMovie()' id='play' class='btn btn-primary'>Play</a>
+        <a href={{movie.path}} id='download' class='btn btn-success' download>Download</a>
+    </div>
+    <div class='poster-container'>
+        <img class='poster-big' src={{movie.posterUrl}}>
+    </div>
+</div>

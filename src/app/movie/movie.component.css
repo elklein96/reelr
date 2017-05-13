@@ -1,0 +1,42 @@
+.movie {
+  height: 275px;
+  width: 160px;
+  position: relative;
+  display: inline;
+  float: left;
+  margin-right: 2.5%;
+  margin-bottom: 1%;
+  padding-top: 1%;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #000;
+}
+
+.movie:hover {
+  border-color: #303030;
+  cursor: pointer;
+}
+
+.selected {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #303030;
+}
+
+.info {
+  margin: auto;
+  display: block;
+  text-align: center;
+}
+
+.poster {
+  height: 160px;
+  margin: auto;
+  display: block;
+}
+
+.poster-big {
+  height: 280px;
+  margin: auto;
+  display: block;
+}

@@ -1,0 +1,21 @@
+# compiled output
+/dist
+/tmp
+
+# dependencies
+/node_modules
+
+# IDE
+.vscode/*
+
+# misc
+npm-debug.log
+/typings
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+#System Files
+.DS_Store
+Thumbs.db

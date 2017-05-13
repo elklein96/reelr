@@ -1,0 +1,17 @@
+body {
+    background-color: #000;
+    color: #fff;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+
+.loading {
+    font-size: 400%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}

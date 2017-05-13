@@ -4,5 +4,5 @@
     <div class="col-sm-3" *ngFor="let movie of filteredMovies">
         <movie [movie]="movie" (click)="togglePreview(movie, i)"></movie>
     </div>
-    <preview *ngIf="(previewIndex === i)" [@accordion]="(previewIndex === i)" [movie]="selectedMovie"></preview>
+    <preview *ngIf="(previewIndex === i)" [movie]="selectedMovie"></preview>
 </div>

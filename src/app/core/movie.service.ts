@@ -12,7 +12,7 @@ export class MovieService {
     constructor(private http: Http) { }
 
     getMovies(id?: String) {
-        let route = id ? `/api/movies?id=${id}` : '/api/movies';
+        const route = id ? `/api/movies?id=${id}` : '/api/movies';
 
         return this.http
             .get(route)
@@ -25,15 +25,15 @@ export class MovieService {
 
     getMoviesFromCache(id?: String) {
         return Observable.create((observer) => {
-            var cachedMovies = JSON.parse(localStorage.getItem('reelr_movies'));
+            const cachedMovies = JSON.parse(localStorage.getItem('reelr_movies'));
             if (cachedMovies) observer.next(cachedMovies);
             else {
                 this.getMovies(id).subscribe(
                     (movies) => {
-                        observer.next(movies)
+                        observer.next(movies);
                     },
                     (error) => {
-                        observer.error(error)
+                        observer.error(error);
                     });
             }
         });
@@ -41,7 +41,7 @@ export class MovieService {
 
     private handleError(error: Response) {
         console.error(error);
-        let msg = `${error.status}:: Error at ${error.url}`;
+        const msg = `${error.status}:: Error at ${error.url}`;
         return Observable.throw(msg);
     }
 }

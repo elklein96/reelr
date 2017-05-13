@@ -1,4 +1,4 @@
-import { Component, trigger, transition, style, animate } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Movie } from '../models/movie.model';
 import { MovieService } from '../core/movie.service';
@@ -6,19 +6,19 @@ import { MovieService } from '../core/movie.service';
 @Component({
   selector: 'movie-dashboard',
   templateUrl: './movie-dashboard.component.html',
-  styleUrls: ['./movie-dashboard.component.css'],
-  animations: [
-    trigger('accordion', [
-      transition(':enter', [
-        style({height: 0}),
-        animate(250, style({height: 310})) 
-      ]),
-      transition(':leave', [
-        style({height: '*'}),
-        animate(250, style({height: 0}))
-      ])
-    ])
-  ]
+  styleUrls: ['./movie-dashboard.component.css']
+  // animations: [
+  //   trigger('accordion', [
+  //     transition(':enter', [
+  //       style({height: 0}),
+  //       animate(250, style({height: 310})) 
+  //     ]),
+  //     transition(':leave', [
+  //       style({height: '*'}),
+  //       animate(250, style({height: 0}))
+  //     ])
+  //   ])
+  // ]
 })
 export class MovieDashboardComponent {
   movies: Movie[];

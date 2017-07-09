@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { PreviewComponent } from './preview.component';
 
@@ -8,7 +10,13 @@ describe('PreviewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PreviewComponent ]
+      imports: [
+        RouterTestingModule,
+        BrowserAnimationsModule
+      ],
+      declarations: [
+        PreviewComponent
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +24,9 @@ describe('PreviewComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PreviewComponent);
     component = fixture.componentInstance;
+
+    // inject @input movie
+
     fixture.detectChanges();
   });
 

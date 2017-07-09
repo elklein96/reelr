@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "dev": "ng serve",
-    "start": "node ./static/server",
+    "start": "ng build --aot && node ./static/server",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "~4.1.2",
     "@angular/common": "~4.1.2",
     "@angular/compiler": "~4.1.2",
     "@angular/core": "~4.1.2",

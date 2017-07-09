@@ -4,57 +4,34 @@ hr {
   color: #FFF;
 }
 
-.info {
-  margin: auto;
-  display: block;
-}
-
-.poster {
-  height: 160px;
-  margin: auto;
-  display: block;
-}
-
 .poster-big {
   height: 280px;
-  margin: auto;
+  margin-top: 15px;
   display: block;
 }
 
-.poster-container {
-  padding-top: 1.5%;
-}
-
-.message {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-#preview {
+.preview {
   height: 310px;
   margin-top: 280px;
   background-color: #303030;
 }
 
-.preview-header {
+.info-container {
   display: block;
   margin-left: 5%;
   margin-right: 5%;
   width: 50%;
-  float: left;
 }
 
-#name {
-  font-size: 150%;
+.poster-container {
+  float: right;
 }
 
-#play {
+.play {
   display: inline;
 }
 
-#download {
+.download {
   display: inline;
   margin-left: 3%;
 }

@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { MovieService } from './movie.service';
 
-describe('TestService', () => {
+describe('MovieService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [MovieService]

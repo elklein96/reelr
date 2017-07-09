@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormsModule }   from '@angular/forms';
 
 import { Movie } from '../models/movie.model';
 import { MovieService } from '../core/movie.service';
@@ -7,24 +8,13 @@ import { MovieService } from '../core/movie.service';
   selector: 'movie-dashboard',
   templateUrl: './movie-dashboard.component.html',
   styleUrls: ['./movie-dashboard.component.css']
-  // animations: [
-  //   trigger('accordion', [
-  //     transition(':enter', [
-  //       style({height: 0}),
-  //       animate(250, style({height: 310})) 
-  //     ]),
-  //     transition(':leave', [
-  //       style({height: '*'}),
-  //       animate(250, style({height: 0}))
-  //     ])
-  //   ])
-  // ]
 })
 export class MovieDashboardComponent {
   movies: Movie[];
   selectedMovie: Movie;
   title: string = 'Movies';
   previewIndex: Number = undefined;
+  showPreview: boolean;
 
   constructor(private movieService: MovieService) {
     this.movieService.getMoviesFromCache()
@@ -40,11 +30,11 @@ export class MovieDashboardComponent {
 
   togglePreview(movie: Movie, previewIndex: Number) {
     if (this.selectedMovie === movie) {
-      this.previewIndex = undefined;
       this.selectedMovie = undefined;
+      this.previewIndex = undefined;
     } else {
-      this.previewIndex = previewIndex;
       this.selectedMovie = movie;
+      this.previewIndex = previewIndex;
     }
   }
 }

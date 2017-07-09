@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
+import { CoreModule } from '../core/core.module';
 import { MovieRoutingModule, routedComponents } from './movie-routing.module';
 import { MovieComponent } from './movie.component';
 
 @NgModule({
   imports: [
-    CommonModule,
+    CoreModule,
     MovieRoutingModule
   ],
   declarations: [
     routedComponents,
     MovieComponent
   ],
-  exports: [MovieComponent]
+  exports: [ MovieComponent ]
 })
 export class MovieModule { }

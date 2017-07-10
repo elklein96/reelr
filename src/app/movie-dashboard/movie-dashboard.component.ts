@@ -16,19 +16,19 @@ export class MovieDashboardComponent {
   previewIndex: Number = undefined;
   showPreview: boolean;
 
-  constructor(private movieService: MovieService) {
+  constructor (private movieService: MovieService) {
     this.movieService.getMoviesFromCache()
       .subscribe(
-        (movies) => {
-          this.movies = movies;
-          this.title += ` (${movies.length})`;
+        (result) => {
+          this.movies = result;
+          this.title += ` (${this.movies.length})`;
         },
         (error) => {
           console.error('Error: Could not get movies: ', error);
         });
   }
 
-  togglePreview(movie: Movie, previewIndex: Number) {
+  togglePreview (movie: Movie, previewIndex: Number) {
     if (this.selectedMovie === movie) {
       this.selectedMovie = undefined;
       this.previewIndex = undefined;

@@ -1,5 +1,9 @@
 body {
-    background-color: #000;
+    background: #596a73;
+    background: -moz-linear-gradient(45deg, #596a73 14%, #343f44 100%);
+    background: -webkit-linear-gradient(45deg, #596a73 14%,#343f44 100%);
+    background: linear-gradient(45deg, #596a73 14%,#343f44 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#596a73', endColorstr='#343f44',GradientType=1 );
     color: #fff;
 }
 

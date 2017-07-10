@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Movie } from '../models/movie.model';
+import { MovieService } from '../core/movie.service';
 
 @Component({
   selector: 'play',
@@ -13,14 +14,25 @@ export class PlayComponent {
   private sub;
   movie;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService) { }
 
-  ngOnInit() {
+  ngOnInit () {
     this.sub = this.route
       .queryParams
-      .subscribe(params => {
-        this.movie = params['movie'] || '';
-      });
+      .subscribe(
+        (params) => {
+          this.movieService.getMoviesFromCache(params.movie)
+            .subscribe(
+              (result) => {
+                this.movie = result;
+              },
+              (error) => {
+                console.error(error);
+              })
+        },
+        (error) => {
+          console.error(error);
+        });
   }
 
   ngOnDestroy() {

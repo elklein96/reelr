@@ -9,9 +9,9 @@ import { Movie } from '../models/movie.model';
 @Injectable()
 export class MovieService {
 
-    constructor(private http: Http) { }
+    constructor (private http: Http) { }
 
-    getMovies(id?: String) {
+    getMovies (id?: String) {
         const route = id ? `/api/movies?id=${id}` : '/api/movies';
 
         return this.http
@@ -23,11 +23,16 @@ export class MovieService {
             .catch(this.handleError);
     }
 
-    getMoviesFromCache(id?: String) {
+    getMoviesFromCache (id?: String) {
         return Observable.create((observer) => {
             const cachedMovies = JSON.parse(localStorage.getItem('reelr_movies'));
-            if (cachedMovies) observer.next(cachedMovies);
-            else {
+            if (cachedMovies && id) {
+                for (const movie of cachedMovies) {
+                    if (movie.title === id) observer.next(movie);
+                }
+            } else if (cachedMovies) {
+                observer.next(cachedMovies);
+            } else {
                 this.getMovies(id).subscribe(
                     (movies) => {
                         observer.next(movies);
@@ -39,7 +44,7 @@ export class MovieService {
         });
     }
 
-    private handleError(error: Response) {
+    private handleError (error: Response) {
         console.error(error);
         const msg = `${error.status}:: Error at ${error.url}`;
         return Observable.throw(msg);

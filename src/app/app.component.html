@@ -7,9 +7,18 @@
             <li><a href="/">Home</a></li>
             <li><a href="/tv">TV Shows</a></li>
             <form class="navbar-form navbar-left" id="search">
-                <input id="search-bar" class="form-control col-lg-8" placeholder="Search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                            <span><i class="fa fa-search"></i></span>
+                        </button>
+                    </span>
+                </div>
             </form>
         </ul>
     </div>
 </div>
-<router-outlet></router-outlet>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

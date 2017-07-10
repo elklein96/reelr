@@ -1,41 +1,45 @@
-import { Component, Input, Output, EventEmitter, trigger, transition, style, animate, OnChanges, SimpleChange } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Movie } from '../models/movie.model';
+import { MovieService } from '../core/movie.service';
 
 @Component({
   selector: 'preview',
   templateUrl: 'preview.component.html',
-  styleUrls: ['preview.component.css'],
-  animations: [
-    trigger('accordion', [
-      transition(':enter', [
-        style({ height: 0 }),
-        animate(400, style({ height: 310 })) 
-      ]),
-      transition(':leave', [
-        style({ height: '*' }),
-        animate(400, style({ height: 0 }))
-      ])
-    ])
-  ]
+  styleUrls: ['preview.component.css']
 })
 export class PreviewComponent {
   
-  @Input() movie: Movie;
+  private sub;
+  movie;
 
-  constructor(private router: Router) { }
+  constructor (private route: ActivatedRoute, private router: Router, private movieService: MovieService) { }
 
-  ngOnChanges(changes: {[ propName: string]: SimpleChange}) {
-    console.log('Change detected:', changes);
+  ngOnInit () {
+    this.sub = this.route
+      .queryParams
+      .subscribe(
+        (params) => {
+          this.movieService.getMoviesFromCache(params.movie)
+            .subscribe(
+              (result) => {
+                this.movie = result;
+              },
+              (error) => {
+                console.error(error);
+              })
+        },
+        (error) => {
+          console.error(error);
+        });
   }
 
-  ngOnDestroy() {
-    console.log(`onDestroy`);
+  ngOnDestroy () {
+    this.sub.unsubscribe();
   }
 
-  playMovie() {
-    this.router.navigate(['/play'], { queryParams: { movie: this.movie.path } });
+  playMovie () {
+    this.router.navigate(['/play'], { queryParams: { movie: this.movie.title } });
   }
 }

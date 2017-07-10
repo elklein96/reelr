@@ -1,13 +1,14 @@
-<div class="row preview" [@accordion]="show">
-    <div class="col-sm-8 info-container">
-        <h3>{{movie.title}}</h3>
-        <hr noshade>
-        <h4>{{movie.director}}</h4><br>
-        <p>{{movie.plot}}</p><br>
-        <a (click)="playMovie()" class="btn btn-primary play">Play</a>
-        <a href={{movie.path}} class="btn btn-success download" download>Download</a>
-    </div>
-    <div class="col-sm-4 poster-container">
+<div class="row">
+    <div class="image-container col-md-4">
         <img class="poster-big" src={{movie.posterUrl}}>
+    </div>
+    <div class="col-md-8">
+        <h2>{{movie.title}}</h2>
+        <p>{{movie.director}}</p>
+        <p>{{movie.genre}}</p>
+        <p>{{movie.plot}}</p>
+        <hr noshade>
+        <a (click)="playMovie()" class="btn btn-primary play">Play</a>
+        <a href={{movie.path}} class="btn btn-success download" target="_blank">Download</a>
     </div>
 </div>

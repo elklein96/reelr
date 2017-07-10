@@ -4,27 +4,14 @@ hr {
   color: #FFF;
 }
 
+.image-container {
+  position: relative;
+}
+
 .poster-big {
   height: 280px;
   margin-top: 15px;
   display: block;
-}
-
-.preview {
-  height: 310px;
-  margin-top: 280px;
-  background-color: #303030;
-}
-
-.info-container {
-  display: block;
-  margin-left: 5%;
-  margin-right: 5%;
-  width: 50%;
-}
-
-.poster-container {
-  float: right;
 }
 
 .play {
@@ -33,5 +20,5 @@ hr {
 
 .download {
   display: inline;
-  margin-left: 3%;
+  margin-left: 15px;
 }

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Movie } from '../models/movie.model';
 
@@ -12,5 +13,9 @@ export class MovieComponent {
   @Input()
   movie: Movie;
   
-  constructor() { }
+  constructor (private router: Router) { }
+
+  displayPreview () {
+    this.router.navigate(['/preview'], { queryParams: { movie: this.movie.title } });
+  }
 }

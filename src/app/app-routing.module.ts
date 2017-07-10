@@ -12,8 +12,16 @@ const routes: Routes = [
     loadChildren: 'app/movie-dashboard/movie-dashboard.module#MovieDashboardModule'
   },
   {
+    path: 'preview',
+    loadChildren: 'app/preview/preview.module#PreviewModule'
+  },
+  {
     path: 'play',
     loadChildren: 'app/play/play.module#PlayModule'
+  },
+  {
+    path: '**',
+    redirectTo: 'movies'
   }
 ];
 

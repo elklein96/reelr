@@ -2,25 +2,22 @@
   height: 275px;
   width: 160px;
   position: relative;
-  display: inline;
   float: left;
-  margin-right: 2.5%;
-  margin-bottom: 1%;
-  padding-top: 1%;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #000;
+  padding: 12px 2px 2px 2px;
+  background-color: none;
+  -webkit-transition: background-color 0.35s;
+  -moz-transition: background-color 0.35s;
+  -o-transition: background-color 0.35s;
+  transition: background-color 0.35s;
 }
 
 .movie:hover {
-  border-color: #303030;
+  background-color: #697a83;
+  -webkit-transition: background-color 0.35s;
+  -moz-transition: background-color 0.35s;
+  -o-transition: background-color 0.35s;
+  transition: background-color 0.35s;
   cursor: pointer;
-}
-
-.selected {
-  border-style: solid;
-  border-width: 2px;
-  border-color: #303030;
 }
 
 .info {
@@ -31,12 +28,6 @@
 
 .poster {
   height: 160px;
-  margin: auto;
-  display: block;
-}
-
-.poster-big {
-  height: 280px;
   margin: auto;
   display: block;
 }

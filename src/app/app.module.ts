@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,10 @@ import { AppRoutingModule } from './app-routing.module';
     HttpModule,
     AppRoutingModule
   ],
-  declarations: [ AppComponent ],
+  declarations: [
+    AppComponent,
+    UploadComponent
+  ],
   providers: [ ],
   bootstrap: [ AppComponent ]
 })

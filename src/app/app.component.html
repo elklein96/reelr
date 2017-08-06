@@ -4,8 +4,7 @@
     </div>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/">Home</a></li>
-            <li><a href="/tv">TV Shows</a></li>
+            <li><a class="upload" (click)="showModal=true"><i class="fa fa-upload fa-lg"></i></a></li>
             <form class="navbar-form navbar-left" id="search">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search...">
@@ -22,3 +21,5 @@
 <div class="container">
     <router-outlet></router-outlet>
 </div>
+
+<upload *ngIf="showModal" (delete)="modalDeleted($event)"></upload>

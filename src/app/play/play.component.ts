@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Movie } from '../models/movie.model';
+import { Movie } from '../core/models/movie.model';
 import { MovieService } from '../core/movie.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { MovieService } from '../core/movie.service';
 export class PlayComponent {
 
   private sub;
-  movie;
+  movie: Movie;
 
   constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService) { }
 

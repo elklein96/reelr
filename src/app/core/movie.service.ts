@@ -4,18 +4,16 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { Movie } from '../models/movie.model';
+import { Movie } from './models/movie.model';
 
 @Injectable()
 export class MovieService {
 
     constructor (private http: Http) { }
 
-    getMovies (id?: String) {
-        const route = id ? `/api/movies?id=${id}` : '/api/movies';
-
+    getMovies (query?: Object) {
         return this.http
-            .get(route)
+            .get('/api/movies', { search: query })
             .map((response: Response) => {
                 localStorage.setItem('reelr_movies', JSON.stringify(response.json().data));
                 return <Movie[]>response.json().data;

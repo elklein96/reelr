@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import 'rxjs/add/operator/map';
 
-import { Movie } from '../models/movie.model';
+import { Movie } from '../core/models/movie.model';
 import { MovieService } from '../core/movie.service';
 
 @Component({
@@ -10,28 +11,30 @@ import { MovieService } from '../core/movie.service';
   styleUrls: ['preview.component.css']
 })
 export class PreviewComponent {
-  
   private sub;
-  movie;
+  movie: Movie;
+  relatedMovies: Array<Movie>;
 
   constructor (private route: ActivatedRoute, private router: Router, private movieService: MovieService) { }
 
   ngOnInit () {
     this.sub = this.route
       .queryParams
-      .subscribe(
-        (params) => {
-          this.movieService.getMoviesFromCache(params.movie)
-            .subscribe(
-              (result) => {
-                this.movie = result;
-              },
-              (error) => {
-                console.error(error);
-              })
-        },
-        (error) => {
-          console.error(error);
+      .subscribe((params) => {
+        this.movieService.getMoviesFromCache(params.movie)
+          .map((result) => {
+            this.movie = result;
+            return this.movie
+          })
+          .subscribe((result) => {
+            this.movieService.getMovies({ genre: this.movie.genre[0] })
+              .subscribe((result) => {
+                this.relatedMovies = result.filter((el) => {
+                  return el.title !== this.movie.title;
+                });
+                return this.relatedMovies;
+              });
+          })
         });
   }
 

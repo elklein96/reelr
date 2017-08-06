@@ -7,6 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'reelr';
+  showModal: Boolean = false;
 
   constructor () { }
+
+  modalDeleted(evt) {
+    this.showModal = false;
+  }
 }

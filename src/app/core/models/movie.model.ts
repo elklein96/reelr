@@ -1,8 +1,7 @@
 export class Movie {
-    counter: number;
     director: string;
     duration: string;
-    genre: string;
+    genre: Array<string>;
     id: string;
     path: string;
     plot: string;

@@ -1,0 +1,84 @@
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    width: 55vw;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+@-webkit-keyframes animatetop {
+    from { top:-300px; opacity:0 } 
+    to { top:0; opacity:1 }
+}
+
+@keyframes animatetop {
+    from { top:-300px; opacity:0 }
+    to { top:0; opacity:1 }
+}
+
+.close {
+    color: #9d9d9d;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    color: #fff;
+    padding: 2px 0px;
+    background-color: #303030;
+}
+
+.modal-header h3 {
+    padding: 2px 15px;
+    background-color: #303030;
+    margin: 10px 2px;
+}
+
+.modal-body {
+    color: #000;
+}
+
+.modal-body label {
+    font-weight: 400;
+    margin: 0;
+    background-color: #9d9d9d;
+    padding: 10px 10px;
+    border-radius: 3px;
+}
+
+.modal-body label:hover {
+    cursor: pointer;
+    background-color: #8c8c8c;
+}
+
+.modal-footer {
+    padding: 15px 15px;
+    background-color: #303030;
+}

@@ -5,3 +5,7 @@
 .container {
     padding-bottom: 10px;
 }
+
+.upload {
+    cursor: pointer;
+}

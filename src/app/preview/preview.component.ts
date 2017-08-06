@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
@@ -6,11 +6,11 @@ import { Movie } from '../core/models/movie.model';
 import { MovieService } from '../core/movie.service';
 
 @Component({
-  selector: 'preview',
+  selector: 'reelr-preview',
   templateUrl: 'preview.component.html',
   styleUrls: ['preview.component.css']
 })
-export class PreviewComponent {
+export class PreviewComponent implements OnInit, OnDestroy {
   private sub;
   movie: Movie;
   relatedMovies: Array<Movie>;
@@ -24,9 +24,9 @@ export class PreviewComponent {
         this.movieService.getMoviesFromCache(params.movie)
           .map((result) => {
             this.movie = result;
-            return this.movie
+            return this.movie;
           })
-          .subscribe((result) => {
+          .subscribe((movie) => {
             this.movieService.getMovies({ genre: this.movie.genre[0] })
               .subscribe((result) => {
                 this.relatedMovies = result.filter((el) => {
@@ -34,7 +34,7 @@ export class PreviewComponent {
                 });
                 return this.relatedMovies;
               });
-          })
+          });
         });
   }
 

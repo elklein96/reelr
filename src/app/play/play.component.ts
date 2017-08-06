@@ -1,15 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Movie } from '../core/models/movie.model';
 import { MovieService } from '../core/movie.service';
 
 @Component({
-  selector: 'play',
+  selector: 'reelr-play',
   templateUrl: 'play.component.html',
   styleUrls: ['play.component.css']
 })
-export class PlayComponent {
+export class PlayComponent implements OnInit, OnDestroy {
 
   private sub;
   movie: Movie;
@@ -28,7 +28,7 @@ export class PlayComponent {
               },
               (error) => {
                 console.error(error);
-              })
+              });
         },
         (error) => {
           console.error(error);

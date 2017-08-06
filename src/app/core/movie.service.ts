@@ -21,12 +21,12 @@ export class MovieService {
             .catch(this.handleError);
     }
 
-    getMoviesFromCache (id?: String) {
+    getMoviesFromCache (id?: string) {
         return Observable.create((observer) => {
             const cachedMovies = JSON.parse(localStorage.getItem('reelr_movies'));
             if (cachedMovies && id) {
                 for (const movie of cachedMovies) {
-                    if (movie.title === id) observer.next(movie);
+                    if (movie.title === id) { observer.next(movie); }
                 }
             } else if (cachedMovies) {
                 observer.next(cachedMovies);

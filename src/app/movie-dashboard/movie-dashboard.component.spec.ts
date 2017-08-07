@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { MovieDashboardRoutingModule, routedComponents } from './movie-dashboard-routing.module';
 import { MovieDashboardComponent } from './movie-dashboard.component';
-import { MovieModule } from '../movie/movie.module';
 import { MovieService } from '../core/movie.service';
 import { PreviewModule } from '../preview/preview.module';
 import { GroupByPipe } from '../core/group-by.pipe';
@@ -28,7 +27,6 @@ describe('MovieDashboardComponent', () => {
       imports: [
         CommonModule,
         MovieDashboardRoutingModule,
-        MovieModule,
         PreviewModule
       ],
       providers: [{provide: MovieService, useValue: movieService }],

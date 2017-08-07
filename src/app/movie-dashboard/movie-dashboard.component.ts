@@ -16,11 +16,15 @@ export class MovieDashboardComponent {
   showPreview: boolean;
 
   constructor (private movieService: MovieService) {
+    this.refreshDashboard();
+  }
+
+  refreshDashboard () {
     this.movieService.getMovies()
       .subscribe(
         (result) => {
           this.movies = result;
-          this.title.concat(` (${this.movies.length})`);
+          this.title += (` (${this.movies.length})`);
         },
         (error) => {
           console.error('Error: Could not get movies: ', error);

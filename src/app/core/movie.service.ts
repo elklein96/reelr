@@ -21,6 +21,15 @@ export class MovieService {
             .catch(this.handleError);
     }
 
+    getMoviesByTitle (query?: Object) {
+        return this.http
+            .get('/api/movies/all', { search: query })
+            .map((response: Response) => {
+                return response.json();
+            })
+            .catch(this.handleError);
+    }
+
     getMoviesFromCache (id?: string) {
         return Observable.create((observer) => {
             const cachedMovies = JSON.parse(localStorage.getItem('reelr_movies'));
@@ -40,6 +49,15 @@ export class MovieService {
                     });
             }
         });
+    }
+
+    createMovie (payload?: Object) {
+        return this.http
+            .post('/api/movies', { movie: payload })
+            .map((response: Response) => {
+                return response.json();
+            })
+            .catch(this.handleError);
     }
 
     private handleError (error: Response) {

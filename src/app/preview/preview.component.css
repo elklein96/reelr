@@ -14,32 +14,3 @@ hr {
   margin-top: 15px;
   display: block;
 }
-
-.button {
-  color: #fff;
-  padding: 15px 15px;
-  margin-right: 15px;
-  display: inline;
-  font-size: 14px;
-  font-weight: 400;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  border: 1px solid transparent;
-  text-decoration: none;
-  border-radius: 4px;
-  background-color: #697a83;
-  -webkit-transition: background-color 0.35s;
-  -moz-transition: background-color 0.35s;
-  -o-transition: background-color 0.35s;
-  transition: background-color 0.35s;
-}
-
-.button:hover {
-  cursor: pointer;
-  background-color: #222;
-  -webkit-transition: background-color 0.35s;
-  -moz-transition: background-color 0.35s;
-  -o-transition: background-color 0.35s;
-  transition: background-color 0.35s;
-}

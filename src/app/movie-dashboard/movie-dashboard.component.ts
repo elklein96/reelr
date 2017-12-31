@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, ViewContainerRef } from '@angular/core';
+
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { Movie } from '../core/models/movie.model';
 import { MovieService } from '../core/movie.service';
@@ -15,8 +16,11 @@ export class MovieDashboardComponent {
   title = 'Movies';
   showPreview: boolean;
 
-  constructor (private movieService: MovieService) {
-    this.refreshDashboard();
+  constructor (private movieService: MovieService,
+    private toastr: ToastsManager,
+    private vcr: ViewContainerRef) {
+      this.toastr.setRootViewContainerRef(vcr);
+      this.refreshDashboard();
   }
 
   refreshDashboard () {
@@ -27,6 +31,7 @@ export class MovieDashboardComponent {
           this.title += (` (${this.movies.length})`);
         },
         (error) => {
+          this.toastr.error(error, 'Could not get movies');
           console.error('Error: Could not get movies: ', error);
         });
   }

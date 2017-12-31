@@ -3,6 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 import { Movie } from './models/movie.model';
 
@@ -31,7 +32,12 @@ export class MovieService {
     }
 
     getMoviesFromCache (id?: string) {
-        return Observable.create((observer) => {
+        return Observable.create(cacheLookup)
+            .map((result) => {
+                return result;
+            });
+
+        function cacheLookup(observer) {
             const cachedMovies = JSON.parse(localStorage.getItem('reelr_movies'));
             if (cachedMovies && id) {
                 for (const movie of cachedMovies) {
@@ -48,7 +54,7 @@ export class MovieService {
                         observer.error(error);
                     });
             }
-        });
+        }
     }
 
     createMovie (payload?: Object) {

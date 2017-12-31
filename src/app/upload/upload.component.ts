@@ -1,5 +1,7 @@
-import { Component, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, Output, EventEmitter, HostListener, ViewContainerRef } from '@angular/core';
 import { DatePipe } from '@angular/common';
+
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { MovieService } from '../core/movie.service';
 
@@ -21,21 +23,28 @@ export class UploadComponent {
     year: ''
   };
 
-  constructor (private movieService: MovieService, private datePipe: DatePipe) { }
+  constructor (private movieService: MovieService,
+    private datePipe: DatePipe,
+    private toastr: ToastsManager,
+    private vcr: ViewContainerRef
+  ) {
+    this.toastr.setRootViewContainerRef(vcr);
+  }
 
   handleFiles (event) {
     this.file = event.srcElement.files[0];
     this.selectedMovie.title = !this.file ? '' : this.file.name.substr(0, this.file.name.lastIndexOf('.'));
-    this.getRelatedMovies();
+    this.getPossibleMovies();
   }
 
-  getRelatedMovies () {
+  getPossibleMovies () {
     this.movieService.getMoviesByTitle({ movie: this.selectedMovie.title })
       .subscribe(
         (result) => {
           this.choices = result;
         },
         (error) => {
+          this.toastr.error(error, 'Could not get movies');
           console.error('Error: Could not get movies: ', error);
         });
   }
@@ -54,7 +63,8 @@ export class UploadComponent {
           console.log(result);
         },
         (error) => {
-          console.error('Error: Could not get movies: ', error);
+          this.toastr.error(error, 'Could not upload movie');
+          console.error('Error: Could not upload movies: ', error);
         });
   }
 

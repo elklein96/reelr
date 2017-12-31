@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import 'rxjs/add/operator/map';
+
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { Movie } from '../core/models/movie.model';
 import { MovieService } from '../core/movie.service';
@@ -15,27 +16,48 @@ export class PreviewComponent implements OnInit, OnDestroy {
   movie: Movie;
   relatedMovies: Array<Movie>;
 
-  constructor (private route: ActivatedRoute, private router: Router, private movieService: MovieService) { }
+  constructor (private route: ActivatedRoute,
+    private router: Router,
+    private movieService: MovieService,
+    private toastr: ToastsManager,
+    private vcr: ViewContainerRef) {
+      this.toastr.setRootViewContainerRef(vcr);
+    }
 
   ngOnInit () {
+    const that = this;
+
     this.sub = this.route
       .queryParams
-      .subscribe((params) => {
-        this.movieService.getMoviesFromCache(params.movie)
-          .map((result) => {
-            this.movie = result;
-            return this.movie;
-          })
-          .subscribe((movie) => {
-            this.movieService.getMovies({ genre: this.movie.genre[0] })
-              .subscribe((result) => {
-                this.relatedMovies = result.filter((el) => {
-                  return el.title !== this.movie.title;
-                });
-                return this.relatedMovies;
-              });
+      .subscribe(lookUpMovie);
+
+    function lookUpMovie(params) {
+      that.movieService.getMoviesFromCache(params.movie)
+        .subscribe(
+          (movie) => {
+            that.movie = movie;
+            getRelatedMovies();
+          },
+          (error) => {
+            that.toastr.error(error, 'Could not get movie');
+            console.error('Error: Could not get movies: ', error);
           });
-        });
+    }
+
+    function getRelatedMovies() {
+      that.movieService.getMovies({ genre: that.movie.genre[0] })
+        .subscribe(
+          (result) => {
+            that.relatedMovies = result.filter((el) => {
+              return el.title !== that.movie.title;
+            });
+            return that.relatedMovies;
+          },
+          (error) => {
+            that.toastr.error(error, 'Could not get related movies');
+            console.error('Error: Could not get related movies: ', error);
+          });
+    }
   }
 
   ngOnDestroy () {

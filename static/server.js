@@ -15,7 +15,6 @@ app.use('/media', express.static(path.join(__dirname, '/../media')))
 app.use(express.static(path.join(__dirname, '/../dist')));
 app.get('*', (req, res, next) => {
     res.sendFile(path.join(__dirname, '/../dist/index.html'));
-    return next();
 });
 
 app.server.listen(process.env.PORT || 3002);

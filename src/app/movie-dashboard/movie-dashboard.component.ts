@@ -18,7 +18,7 @@ export class MovieDashboardComponent {
   movies: Movie[];
 
   private pageSize = 4;
-  private currentPage = 1;
+  private currentPage: number;
   private maxPages: number;
 
   constructor(private movieService: MovieService,
@@ -41,9 +41,10 @@ export class MovieDashboardComponent {
       .subscribe(
         (result) => {
           this.movies = result;
+          this.currentPage = Math.ceil(window.innerHeight / 275);
           this.maxPages = Math.ceil(this.movies.length / this.pageSize);
           this.title += (` (${this.movies.length})`);
-          this.displayedMovies = this.movies.slice(0, this.pageSize);
+          this.displayedMovies = this.movies.slice(0, this.pageSize * this.currentPage);
         },
         (error) => {
           this.toastr.error(error, 'Could not get movies');

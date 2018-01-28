@@ -2,7 +2,7 @@
     <div class="navbar-header">
         <a class="navbar-brand" href="/">elkServer</a>
     </div>
-    <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <div *ngIf="loggedIn()" class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav navbar-right">
             <li><a class="upload" (click)="showModal=true"><i class="fa fa-upload fa-lg"></i></a></li>
             <form class="navbar-form navbar-left" id="search">

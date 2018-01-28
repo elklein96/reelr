@@ -37,6 +37,15 @@ export class AuthService {
         return false;
     }
 
+    logOut() {
+        return this.http
+            .delete('/api/login')
+            .map((response: Response) => {
+                return response.json();
+            })
+            .catch(this.handleError);
+    }
+
     private handleError(error: Response) {
         console.error(error);
         const msg = `${error.status}:: Error at ${error.url}`;

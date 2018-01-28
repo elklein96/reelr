@@ -36,8 +36,13 @@ export class MovieDashboardComponent {
     }
   }
 
-  refreshDashboard() {
-    this.movieService.getMovies()
+  refreshDashboard(query?: string) {
+    let search;
+    if (query) {
+      search = { title: query };
+    }
+
+    this.movieService.getMovies(search)
       .subscribe(
         (result) => {
           this.movies = result;

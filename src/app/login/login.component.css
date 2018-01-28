@@ -1,3 +1,48 @@
+input {
+    margin-bottom: 15px;
+    padding: 10px 25vw 10px 15px;
+    font-size: 16px;
+    color: #333;
+    border: none;
+    border-radius: 3px;
+    background-color: #697a83;
+    -webkit-transition: background-color 0.35s;
+    -moz-transition: background-color 0.35s;
+    -o-transition: background-color 0.35s;
+    transition: background-color 0.35s;
+}
+
+::placeholder {
+    color: #aaa;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #aaa;
+}
+
+::-ms-input-placeholder {
+    color: #aaa;
+}
+
+input:hover {
+    cursor: text;
+    background-color: #fff;
+    -webkit-transition: background-color 0.35s;
+    -moz-transition: background-color 0.35s;
+    -o-transition: background-color 0.35s;
+    transition: background-color 0.35s;
+}
+
+input:focus {
+    outline: none;
+    background-color: #fff;
+}
+
+input .has-text {
+    background-color: #fff;
+}
+
 .login-title {
     font-size: 3em;
     font-weight: 200;

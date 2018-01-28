@@ -5,15 +5,9 @@
         <br>
         <p class="login-subtitle">Log in</p>
         <br>
-        <div class="input-group">
-            <span class="input-group-addon">Username</span>
-            <input #username type="text" placeholder="Username..." class="form-control" autofocus>
-        </div>
+        <input #username (keyup)="$event.target.style['background-color'] = '#fff'" type="text" placeholder="Username..." autofocus>
         <br>
-        <div class="input-group">
-            <span class="input-group-addon">Password</span>
-            <input #password type="password" placeholder="Password..." class="form-control" (keyup.enter)="logIn(username.value, password.value)">
-        </div>
+        <input #password (keyup)="$event.target.style['background-color'] = '#fff'" type="password" placeholder="Password..." (keyup.enter)="logIn(username.value, password.value)">
         <br>
         <a (click)="logIn(username.value, password.value)" class="button">Log In</a>
         <br><br>

@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'reelr';
   showModal: Boolean = false;
 
-  constructor () { }
+  constructor() { }
 
   modalDeleted(evt) {
     this.showModal = false;

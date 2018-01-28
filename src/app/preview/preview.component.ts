@@ -8,6 +8,7 @@ import { MovieService } from '../core/movie.service';
 
 @Component({
   selector: 'reelr-preview',
+  providers: [MovieService],
   templateUrl: 'preview.component.html',
   styleUrls: ['preview.component.css']
 })
@@ -16,7 +17,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
   movie: Movie;
   relatedMovies: Array<Movie>;
 
-  constructor (private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
     private router: Router,
     private movieService: MovieService,
     private toastr: ToastsManager,
@@ -24,7 +25,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
       this.toastr.setRootViewContainerRef(vcr);
     }
 
-  ngOnInit () {
+  ngOnInit() {
     const that = this;
 
     this.sub = this.route
@@ -60,11 +61,11 @@ export class PreviewComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy () {
+  ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
-  playMovie () {
+  playMovie() {
     this.router.navigate(['/play'], { queryParams: { movie: this.movie.title } });
   }
 }

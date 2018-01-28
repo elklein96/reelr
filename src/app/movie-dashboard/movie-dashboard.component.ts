@@ -7,6 +7,7 @@ import { MovieService } from '../core/movie.service';
 
 @Component({
   selector: 'movie-dashboard',
+  providers: [MovieService],
   templateUrl: './movie-dashboard.component.html',
   styleUrls: ['./movie-dashboard.component.css']
 })
@@ -15,13 +16,12 @@ export class MovieDashboardComponent {
   title = 'Movies';
   displayedMovies: Movie[];
   movies: Movie[];
-  showPreview: boolean;
 
   private pageSize = 4;
   private currentPage = 1;
   private maxPages: number;
 
-  constructor (private movieService: MovieService,
+  constructor(private movieService: MovieService,
     private toastr: ToastsManager,
     private vcr: ViewContainerRef) {
       this.toastr.setRootViewContainerRef(vcr);
@@ -36,7 +36,7 @@ export class MovieDashboardComponent {
     }
   }
 
-  refreshDashboard () {
+  refreshDashboard() {
     this.movieService.getMovies()
       .subscribe(
         (result) => {

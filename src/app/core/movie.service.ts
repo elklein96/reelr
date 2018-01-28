@@ -12,7 +12,7 @@ export class MovieService {
 
     constructor (private http: Http) { }
 
-    getMovies (query?: Object) {
+    getMovies(query?: Object) {
         return this.http
             .get('/api/movies', { search: query })
             .map((response: Response) => {
@@ -22,7 +22,7 @@ export class MovieService {
             .catch(this.handleError);
     }
 
-    getMoviesByTitle (query?: Object) {
+    getMoviesByTitle(query?: Object) {
         return this.http
             .get('/api/movies/all', { search: query })
             .map((response: Response) => {
@@ -31,7 +31,7 @@ export class MovieService {
             .catch(this.handleError);
     }
 
-    getMoviesFromCache (id?: string) {
+    getMoviesFromCache(id?: string) {
         return Observable.create(cacheLookup)
             .map((result) => {
                 return result;
@@ -57,7 +57,7 @@ export class MovieService {
         }
     }
 
-    createMovie (payload?: Object) {
+    createMovie(payload?: Object) {
         return this.http
             .post('/api/movies', { movie: payload })
             .map((response: Response) => {
@@ -66,7 +66,7 @@ export class MovieService {
             .catch(this.handleError);
     }
 
-    private handleError (error: Response) {
+    private handleError(error: Response) {
         console.error(error);
         const msg = `${error.status}:: Error at ${error.url}`;
         return Observable.throw(msg);

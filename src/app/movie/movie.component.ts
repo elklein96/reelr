@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Movie } from '../models/movie.model';
+import { Movie } from '../core/models/movie.model';
 
 @Component({
   selector: 'reelr-movie',
@@ -13,9 +13,9 @@ export class MovieComponent {
   @Input()
   movie: Movie;
 
-  constructor (private router: Router) { }
+  constructor(private router: Router) { }
 
-  displayPreview () {
+  displayPreview() {
     this.router.navigate(['/preview'], { queryParams: { movie: this.movie.title } });
   }
 }

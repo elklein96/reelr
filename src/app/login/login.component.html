@@ -1,0 +1,22 @@
+<div class="row text-center">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <p class="login-title">Welcome to reelr</p>
+        <br>
+        <p class="login-subtitle">Log in</p>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon">Username</span>
+            <input #username type="text" placeholder="Username..." class="form-control" autofocus>
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon">Password</span>
+            <input #password type="password" placeholder="Password..." class="form-control" (keyup.enter)="logIn(username.value, password.value)">
+        </div>
+        <br>
+        <a (click)="logIn(username.value, password.value)" class="button">Log In</a>
+        <br><br>
+    </div>
+    <div class="col-lg-2"></div>
+</div>

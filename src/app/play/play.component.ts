@@ -6,6 +6,7 @@ import { MovieService } from '../core/movie.service';
 
 @Component({
   selector: 'reelr-play',
+  providers: [MovieService],
   templateUrl: 'play.component.html',
   styleUrls: ['play.component.css']
 })
@@ -14,9 +15,11 @@ export class PlayComponent implements OnInit, OnDestroy {
   private sub;
   movie: Movie;
 
-  constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService) { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private movieService: MovieService) { }
 
-  ngOnInit () {
+  ngOnInit() {
     this.sub = this.route
       .queryParams
       .subscribe(

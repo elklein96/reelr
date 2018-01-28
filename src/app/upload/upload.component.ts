@@ -23,7 +23,7 @@ export class UploadComponent {
     year: ''
   };
 
-  constructor (private movieService: MovieService,
+  constructor(private movieService: MovieService,
     private datePipe: DatePipe,
     private toastr: ToastsManager,
     private vcr: ViewContainerRef
@@ -31,13 +31,13 @@ export class UploadComponent {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
-  handleFiles (event) {
+  handleFiles(event) {
     this.file = event.srcElement.files[0];
     this.selectedMovie.title = !this.file ? '' : this.file.name.substr(0, this.file.name.lastIndexOf('.'));
     this.getPossibleMovies();
   }
 
-  getPossibleMovies () {
+  getPossibleMovies() {
     this.movieService.getMoviesByTitle({ movie: this.selectedMovie.title })
       .subscribe(
         (result) => {
@@ -49,13 +49,13 @@ export class UploadComponent {
         });
   }
 
-  selectMovie (movie) {
+  selectMovie(movie) {
     this.choices = [];
     this.selectedMovie.title = movie.title;
     this.selectedMovie.year = this.datePipe.transform(movie.date, 'y');
   }
 
-  upload () {
+  upload() {
     this.movieService.createMovie(this.selectedMovie)
       .subscribe(
         (result) => {
@@ -69,7 +69,7 @@ export class UploadComponent {
   }
 
   @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent (event: KeyboardEvent) {
+  handleKeyboardEvent(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       this.delete.emit('destroy');
     }

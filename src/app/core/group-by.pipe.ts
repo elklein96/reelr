@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({name: 'groupBy'})
 export class GroupByPipe implements PipeTransform {
 
-  transform (array: any[], chuckSize: number) {
+  transform(array: any[], chuckSize: number) {
     let i, j, subArray = [];
     const outputArray = [];
 

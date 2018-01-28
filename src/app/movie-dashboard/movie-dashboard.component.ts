@@ -30,7 +30,7 @@ export class MovieDashboardComponent {
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll($event) {
-    if (window.pageYOffset > window.innerHeight - 300 && this.currentPage < this.maxPages) {
+    if (window.pageYOffset > window.innerHeight - 275 * this.currentPage && this.currentPage < this.maxPages) {
       const offset = this.currentPage++ * this.pageSize;
       this.displayedMovies = this.displayedMovies.concat(this.movies.slice(offset, offset + this.pageSize));
     }

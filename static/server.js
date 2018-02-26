@@ -11,7 +11,7 @@ app.server = http.createServer(app);
 app.use(errorHandler.logError);
 app.use(errorHandler.sendError);
 
-app.use('/media', express.static(path.join(__dirname, '/../media')))
+app.use('/media', express.static(path.join(__dirname, '/../media')));
 app.use(express.static(path.join(__dirname, '/../dist')));
 app.get('*', (req, res, next) => {
     res.sendFile(path.join(__dirname, '/../dist/index.html'));

@@ -48,13 +48,11 @@ export class PreviewComponent implements OnInit, OnDestroy {
     function getRelatedMovies() {
       that.movieService.getMovies({ genre: that.movie.genre[0] })
         .subscribe(
-          (result) => {
-            that.relatedMovies = result.filter((el) => {
-              return el.title !== that.movie.title;
-            });
+          result => {
+            that.relatedMovies = result.filter(el => el.title !== that.movie.title);
             return that.relatedMovies;
           },
-          (error) => {
+          error => {
             that.toastr.error(error, 'Could not get related movies');
             console.error('Error: Could not get related movies: ', error);
           });

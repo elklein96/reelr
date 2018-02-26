@@ -7,12 +7,12 @@
         <p>{{movie.director}}</p>
         <p>{{movie.genre.join(', ')}}</p>
         <p>{{movie.plot}}</p>
-        <hr>
+        <hr />
         <a (click)="playMovie()" class="button btn-play">Play</a>
         <a href={{movie.path}} class="button btn-download" target="_blank">Download</a>
     </div>
 </div>
-<br>
+<br />
 <div class="row">
     <div class="col-sm-12">
         <h4>Related Movies:</h4>

@@ -7,7 +7,7 @@
         <div class="modal-body">
             <div class="input-group">
                 <span class="input-group-addon" id="upload-addon1">Movie title</span>
-                <input [(ngModel)]="selectedMovie.title" [disabled]="!file" type="text" class="form-control" id="movie-title" aria-describedby="upload-addon1" placeholder="Enter a title...">
+                <input [(ngModel)]="selectedMovie.title" [disabled]="!file" type="text" class="form-control" id="movie-title" aria-describedby="upload-addon1" placeholder="Enter a title..." />
             </div>
             <div *ngIf="(choices.length > 0)" id="auto-complete-container">
                 <ul>
@@ -22,9 +22,9 @@
                 <div class="progress">
                     <div [ngStyle]="{'width': status + '%'}" class="progress-bar" role="progressbar" [attr.aria-valuenow]="status" aria-valuemin="0" aria-valuemax="100"> {{status}}% </div>
                 </div>
-                <hr>
+                <hr />
             </div>
-            <input type="file" id="fileElem" accept="video/*" style="display:none" (change)="handleFiles($event)">
+            <input type="file" id="fileElem" accept="video/*" style="display:none" (change)="handleFiles($event)" />
             <label class="button" for="fileElem">Choose a Movie</label>
             <button class="button" [disabled]="!file" (click)="upload()">Submit</button>
         </div>

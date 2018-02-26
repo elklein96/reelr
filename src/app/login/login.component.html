@@ -2,15 +2,15 @@
     <div class="col-lg-2"></div>
     <div class="col-lg-8">
         <p class="login-title">Welcome to reelr</p>
-        <br>
+        <br />
         <p class="login-subtitle">Log in</p>
-        <br>
-        <input #username (keyup)="$event.target.style['background-color'] = '#fff'" type="text" placeholder="Username..." autofocus>
-        <br>
-        <input #password (keyup)="$event.target.style['background-color'] = '#fff'" type="password" placeholder="Password..." (keyup.enter)="logIn(username.value, password.value)">
-        <br>
+        <br />
+        <input #username (keyup)="$event.target.style['background-color'] = '#fff'" type="text" placeholder="Username..." autofocus />
+        <br />
+        <input #password (keyup)="$event.target.style['background-color'] = '#fff'" type="password" placeholder="Password..." (keyup.enter)="logIn(username.value, password.value)" />
+        <br />
         <a (click)="logIn(username.value, password.value)" class="button">Log In</a>
-        <br><br>
+        <br /><br />
     </div>
     <div class="col-lg-2"></div>
 </div>

@@ -14,7 +14,7 @@
                 <li title="Upload Movie"><a class="upload" (click)="showModal=true"><i class="fa fa-upload fa-lg"></i></a></li>
                 <form class="navbar-form navbar-left" id="search">
                     <div class="input-group">
-                        <input #searchbox type="text" class="form-control" placeholder="Search..." (keyup.enter)="search(searchbox.value)">
+                        <input #searchbox type="text" class="form-control" placeholder="Search..." (keyup.enter)="search(searchbox.value)" />
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button" (click)="search(searchbox.value)">
                                 <span><i class="fa fa-search"></i></span>

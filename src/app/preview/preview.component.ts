@@ -5,6 +5,8 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { Movie } from '../core/models/movie.model';
 import { MovieService } from '../core/movie.service';
+import { AuthService } from '../core/auth.service';
+import { WindowRef } from '../core/window-ref.service';
 
 @Component({
   selector: 'reelr-preview',
@@ -20,8 +22,10 @@ export class PreviewComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private movieService: MovieService,
+    private authService: AuthService,
     private toastr: ToastsManager,
-    private vcr: ViewContainerRef) {
+    private vcr: ViewContainerRef,
+    private windowRef: WindowRef) {
       this.toastr.setRootViewContainerRef(vcr);
     }
 
@@ -35,11 +39,11 @@ export class PreviewComponent implements OnInit, OnDestroy {
     function lookUpMovie(params) {
       that.movieService.getMoviesFromCache(params.movie)
         .subscribe(
-          (movie) => {
+          movie => {
             that.movie = movie;
             getRelatedMovies();
           },
-          (error) => {
+          error => {
             that.toastr.error(error, 'Could not get movie');
             console.error('Error: Could not get movies: ', error);
           });
@@ -64,6 +68,26 @@ export class PreviewComponent implements OnInit, OnDestroy {
   }
 
   playMovie() {
-    this.router.navigate(['/play'], { queryParams: { movie: this.movie.title } });
+    this.logEvent('play')
+      .subscribe(
+        () => {},
+        error => console.error('Error: Could not log analytics: ', error),
+        () => this.router.navigate(['/play'], { queryParams: { movie: this.movie.title } }));
+  }
+
+  downloadMovie() {
+    this.logEvent('download')
+      .subscribe(
+        () => {},
+        error => console.error('Error: Could not log analytics: ', error),
+        () => this.windowRef.nativeWindow.open(this.movie.path, '_blank'));
+  }
+
+  logEvent(action: string) {
+    const activity = {
+      action,
+      movie: this.movie.title
+    }
+    return this.authService.logActivity(activity);
   }
 }

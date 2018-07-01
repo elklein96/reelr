@@ -12,6 +12,8 @@ import { CookieService } from './cookie.service';
 @Injectable()
 export class AuthService {
 
+    currentUser: string;
+
     constructor (private http: Http,
         private jwtHelper: JwtHelperService,
         private cookieService: CookieService) { }
@@ -29,6 +31,8 @@ export class AuthService {
         try {
             const token = this.cookieService.getCookie('reelr_jwt');
             const loggedIn = !this.jwtHelper.isTokenExpired(token);
+            const tokenContents = this.jwtHelper.decodeToken(token);
+            this.currentUser = tokenContents.username;
             if (loggedIn) {
                 return loggedIn;
             }
@@ -40,6 +44,17 @@ export class AuthService {
     logOut() {
         return this.http
             .delete('/api/login')
+            .map((response: Response) => {
+                return response.json();
+            })
+            .catch(this.handleError);
+    }
+
+    logActivity(activity) {
+        activity.username = this.currentUser;
+        activity.date = new Date().toISOString();
+        return this.http
+            .post('/api/activity', { activity })
             .map((response: Response) => {
                 return response.json();
             })

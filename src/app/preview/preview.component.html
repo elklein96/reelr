@@ -9,7 +9,7 @@
         <p>{{movie.plot}}</p>
         <hr />
         <a (click)="playMovie()" class="button btn-play">Play</a>
-        <a href={{movie.path}} class="button btn-download" target="_blank">Download</a>
+        <a (click)="downloadMovie()" class="button btn-download">Download</a>
     </div>
 </div>
 <br />

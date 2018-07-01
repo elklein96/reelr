@@ -18,6 +18,7 @@ import { PreviewComponent } from './preview/preview.component';
 import { AuthGuard } from './core/auth-guard.service';
 import { AuthService } from './core/auth.service';
 import { CookieService } from './core/cookie.service';
+import { WindowRef } from './core/window-ref.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @NgModule({
@@ -45,7 +46,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
     AuthGuard,
     AuthService,
     CookieService,
-    JwtHelperService
+    JwtHelperService,
+    WindowRef
   ],
   bootstrap: [ AppComponent ]
 })

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
@@ -10,7 +11,17 @@ import { Movie } from './models/movie.model';
 @Injectable()
 export class MovieService {
 
+    private _subject = new BehaviorSubject('');
+
     constructor (private http: Http) { }
+
+    doSearch(searchTerm: string) {
+        this._subject.next(searchTerm);
+    }
+
+    getSearchStream(): Observable<string> {
+        return this._subject.asObservable();
+    }
 
     getMovies(query?: Object) {
         return this.http
@@ -47,12 +58,9 @@ export class MovieService {
                 observer.next(cachedMovies);
             } else {
                 this.getMovies(id).subscribe(
-                    (movies) => {
-                        observer.next(movies);
-                    },
-                    (error) => {
-                        observer.error(error);
-                    });
+                    movies => observer.next(movies),
+                    error => observer.error(error)
+                );
             }
         }
     }

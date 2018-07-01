@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewContainerRef } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
@@ -7,16 +7,16 @@ import { MovieService } from '../core/movie.service';
 
 @Component({
   selector: 'movie-dashboard',
-  providers: [MovieService],
   templateUrl: './movie-dashboard.component.html',
   styleUrls: ['./movie-dashboard.component.css']
 })
-export class MovieDashboardComponent {
+export class MovieDashboardComponent implements OnInit, OnDestroy {
   selectedMovie: Movie;
-  title = 'Movies';
+  title = 'Movies (0)';
   displayedMovies: Movie[];
   movies: Movie[];
-
+  
+  private searchStream;
   private pageSize = 4;
   private currentPage: number;
   private maxPages: number;
@@ -25,7 +25,15 @@ export class MovieDashboardComponent {
     private toastr: ToastsManager,
     private vcr: ViewContainerRef) {
       this.toastr.setRootViewContainerRef(vcr);
-      this.refreshDashboard();
+  }
+
+  ngOnInit() {
+    this.searchStream = this.movieService.getSearchStream().subscribe(
+      query => this.refreshDashboard(query));
+  }
+
+  ngOnDestroy() {
+    this.searchStream.unsubscribe();
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -48,7 +56,7 @@ export class MovieDashboardComponent {
           this.movies = result;
           this.currentPage = Math.ceil(window.innerHeight / 275);
           this.maxPages = Math.ceil(this.movies.length / this.pageSize);
-          this.title += (` (${this.movies.length})`);
+          this.title = this.title.replace(/\(\d+\)/, `(${this.movies.length})`);
           this.displayedMovies = this.movies.slice(0, this.pageSize * this.currentPage);
         },
         (error) => {

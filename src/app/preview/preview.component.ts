@@ -10,7 +10,6 @@ import { WindowRef } from '../core/window-ref.service';
 
 @Component({
   selector: 'reelr-preview',
-  providers: [MovieService],
   templateUrl: 'preview.component.html',
   styleUrls: ['preview.component.css']
 })
@@ -32,8 +31,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const that = this;
 
-    this.sub = this.route
-      .queryParams
+    this.sub = this.route.queryParams
       .subscribe(lookUpMovie);
 
     function lookUpMovie(params) {
@@ -52,10 +50,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     function getRelatedMovies() {
       that.movieService.getMovies({ genre: that.movie.genre[0] })
         .subscribe(
-          result => {
-            that.relatedMovies = result.filter(el => el.title !== that.movie.title);
-            return that.relatedMovies;
-          },
+          result => that.relatedMovies = result.filter(el => el.title !== that.movie.title),
           error => {
             that.toastr.error(error, 'Could not get related movies');
             console.error('Error: Could not get related movies: ', error);
@@ -69,18 +64,20 @@ export class PreviewComponent implements OnInit, OnDestroy {
 
   playMovie() {
     this.logEvent('play')
-      .subscribe(
-        () => {},
-        error => console.error('Error: Could not log analytics: ', error),
-        () => this.router.navigate(['/play'], { queryParams: { movie: this.movie.title } }));
+      .subscribe({
+        next: () => {},
+        error: error => console.error('Error: Could not log analytics: ', error),
+        complete: () => this.router.navigate(['/play'], { queryParams: { movie: this.movie.title } })
+      });
   }
 
   downloadMovie() {
     this.logEvent('download')
-      .subscribe(
-        () => {},
-        error => console.error('Error: Could not log analytics: ', error),
-        () => this.windowRef.nativeWindow.open(this.movie.path, '_blank'));
+      .subscribe({
+          next: () => {},
+          error: error => console.error('Error: Could not log analytics: ', error),
+          complete: () => this.windowRef.nativeWindow.open(this.movie.path, '_blank')
+      });
   }
 
   logEvent(action: string) {

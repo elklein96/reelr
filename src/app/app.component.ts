@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewContainerRef } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -8,7 +8,6 @@ import { MovieService } from './core/movie.service';
 
 @Component({
   selector: 'reelr-app',
-  providers: [MovieService],
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css']
 })
@@ -44,15 +43,6 @@ export class AppComponent {
   }
 
   search(query: string) {
-    this.movieService.getMovies({ title: query })
-      .subscribe(
-        (result) => {
-          // self.movieDashboardComponent.movies = result;
-          console.log(result);
-        },
-        (error) => {
-          this.toastr.error(error, 'Could not get movies');
-          console.error('Error: Could not get movies: ', error);
-        });
+    this.movieService.doSearch(query);
   }
 }

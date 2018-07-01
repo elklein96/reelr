@@ -20,6 +20,7 @@ import { AuthService } from './core/auth.service';
 import { CookieService } from './core/cookie.service';
 import { WindowRef } from './core/window-ref.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { MovieService } from './core/movie.service';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
     AuthService,
     CookieService,
     JwtHelperService,
+    MovieService,
     WindowRef
   ],
   bootstrap: [ AppComponent ]

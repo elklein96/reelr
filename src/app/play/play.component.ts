@@ -6,7 +6,6 @@ import { MovieService } from '../core/movie.service';
 
 @Component({
   selector: 'reelr-play',
-  providers: [MovieService],
   templateUrl: 'play.component.html',
   styleUrls: ['play.component.css']
 })
